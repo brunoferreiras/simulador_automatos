@@ -14,7 +14,7 @@ class AutomatoController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**

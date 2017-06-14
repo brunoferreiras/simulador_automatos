@@ -14,7 +14,7 @@ class AutomatoController extends Controller
      */
     public function index()
     {
-        
+        return view('automatos.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class AutomatoController extends Controller
      */
     public function create()
     {
-        //
+        return view('automatos.create');
     }
 
     /**
@@ -35,7 +35,7 @@ class AutomatoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect(route('automatos.index'));
     }
 
     /**
@@ -46,7 +46,7 @@ class AutomatoController extends Controller
      */
     public function show(Automato $automato)
     {
-        //
+        return view('automatos.show');
     }
 
     /**
@@ -57,7 +57,7 @@ class AutomatoController extends Controller
      */
     public function edit(Automato $automato)
     {
-        //
+        return view('automatos.edit');
     }
 
     /**
@@ -69,7 +69,7 @@ class AutomatoController extends Controller
      */
     public function update(Request $request, Automato $automato)
     {
-        //
+        return redirect(route('automatos.index'));
     }
 
     /**
@@ -80,6 +80,6 @@ class AutomatoController extends Controller
      */
     public function destroy(Automato $automato)
     {
-        //
+        return redirect(route('automatos.index'));
     }
 }

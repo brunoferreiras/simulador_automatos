@@ -16,7 +16,8 @@
 
 		<!-- Optional theme -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    </head>
+		<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+	</head>
     <body>
         <div class="container">
 	      <!-- Static navbar -->
@@ -29,7 +30,7 @@
 	              <span class="icon-bar"></span>
 	              <span class="icon-bar"></span>
 	            </button>
-	            <a class="navbar-brand" href="#">Simulador de Autômatos</a>
+	            <a class="navbar-brand" href="{{ url('') }}">Simulador de Autômatos</a>
 	          </div>
 	          <div id="navbar" class="navbar-collapse collapse">
 	            <ul class="nav navbar-nav">

@@ -35,6 +35,33 @@ class AutomatoController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'nome' => 'required|unique:automatos',
+            'estados' => 'required',
+            'eventos' => 'required',
+            'relacao_estados_eventos' => 'required',
+            'estado_inicial' => 'required',
+            'estados_marcados' => 'required'
+        ]);
+
+        $dados = [
+            'nome' => $request->tag_rfid,
+            'estados' => $request->cod_barras,
+            'eventos' => $request->produto,
+            'relacao_estados_eventos' => trim($request->descricao),
+            'estado_inicial' => $request->quantidade,
+            'estados_marcados' => $request->quantidade,
+        ];
+
+        $criado = $this->produto->create($dados);
+
+        if($criado){
+            return redirect()->route('automatos.index')->with('success', 'Produto cadastrado com sucesso!');
+        }
+        else{
+            return redirect()->route('automatos.index')->with('error', 'Não foi possível cadastrar o produto! Por favor, tente novamente!');
+        }
+        
         return redirect(route('automatos.index'));
     }
 

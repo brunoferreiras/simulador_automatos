@@ -1,8 +1,7 @@
 <div class="form-group {{ $errors->has('nome') ? ' has-error' : ''}}">
     <label for="nome" class="col-sm-2 control-label">Nome:</label>
     <div class="col-sm-10">
-        <input type="text" class="form-control" name="nome" placeholder="Digite o nome do
-        autômato"
+        <input type="text" class="form-control" name="nome" placeholder="Digite o nome do autômato"
                required>
         @if ( $errors->has('nome') )
             <span class="help-block">

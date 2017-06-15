@@ -133,6 +133,13 @@ class AutomatoController extends Controller
      */
     public function destroy(Automato $automato)
     {
-        return redirect(route('automatos.index'));
+        $delete = $this->automato->find($automato->id)->delete();
+
+        if($delete){
+            return redirect()->route('automatos.index')->with('success', 'Autômato excluído com sucesso!');
+        }
+        else{
+            return redirect()->route('automatos.index')->with('error', 'Não foi possível excluir o autômato! Por favor, tente novamente!');
+        }
     }
 }

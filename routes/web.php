@@ -13,3 +13,4 @@
 
 Route::get('/', 'DashboardController@index');
 Route::resource('automatos', 'AutomatoController');
+Route::get('/graficos', 'GraficoController@index');

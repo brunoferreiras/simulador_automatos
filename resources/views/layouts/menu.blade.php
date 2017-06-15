@@ -74,8 +74,10 @@
 		{{-- ArborJS --}}
         {{--<script src="{{ asset('/js/arborjs/lib/arbor.js') }}"></script>--}}
         {{--<script src="{{ asset('/js/arborjs/lib/arbor-tween.js') }}"></script>--}}
-        <script src="{{ asset('/js/springy-master/springy.js') }}"></script>
-        <script src="{{ asset('/js/springy-master/springyui.js') }}"></script>
+        {{--<script src="{{ asset('/js/springy-master/springy.js') }}"></script>--}}
+        {{--<script src="{{ asset('/js/springy-master/springyui.js') }}"></script>--}}
+        <script src="{{ asset('/js/code/cytoscape.min.js') }}"></script>
+{{--        <script src="{{ asset('/js/code/code.js') }}"></script>--}}
 
         @yield('scripts')
 

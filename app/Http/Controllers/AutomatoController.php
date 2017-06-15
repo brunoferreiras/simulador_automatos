@@ -93,7 +93,8 @@ class AutomatoController extends Controller
      */
     public function edit(Automato $automato)
     {
-        return view('automatos.edit');
+        $automato = $this->automato->find($automato->id);
+        return view('automatos.edit', compact('automato'));
     }
 
     /**

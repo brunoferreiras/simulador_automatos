@@ -3,7 +3,7 @@
 @section('content')
     <h1 class="text-center">Lista dos autômatos</h1>
     <div class="form-group">
-        <a class="btn btn-success" href="{{ route('automatos.create') }}">Cadastrar Produto</a>
+        <a class="btn btn-success" href="{{ route('automatos.create') }}">Cadastrar Autômato</a>
     </div>
 
     <div class="table-responsive">

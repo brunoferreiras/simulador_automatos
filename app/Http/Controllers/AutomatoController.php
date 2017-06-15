@@ -107,7 +107,7 @@ class AutomatoController extends Controller
     public function update(Request $request, Automato $automato)
     {
         $this->validate($request,[
-            'nome' => 'required|unique:automatos',
+            'nome' => 'required',
             'estados' => 'required',
             'eventos' => 'required',
             'relacao_estados_eventos' => 'required',

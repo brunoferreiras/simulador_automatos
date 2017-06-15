@@ -6,12 +6,12 @@
             Criar Autômato
         </h1>
     </section>
-    <form class="form-horizontal" action="{{ route('automatos.store') }}">
+    <form class="form-horizontal" role="form" action="{{ route('automatos.store') }}" method="POST">
         {{ csrf_field() }}
         <div class="form-group {{ $errors->has('nome') ? ' has-error' : ''}}">
             <label for="nome" class="col-sm-2 control-label">Nome:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="nome" placeholder="Digite o nome do autômato" value="{{ old('nome') }}" required>
+                <input type="text" class="form-control" name="nome" placeholder="Digite o nome do autômato" required>
                 @if ( $errors->has('nome') )
                     <span class="help-block">
                         <strong>{{ $errors->first('nome') }}</strong>
@@ -68,13 +68,13 @@
             </div>
         </div>
 
-        <div class="form-group {{ $errors->has('estado_marcado') ? ' has-error' : ''}}">
-            <label for="estado_marcado" class="col-sm-2 control-label">Estados Marcados:</label>
+        <div class="form-group {{ $errors->has('estados_marcados') ? ' has-error' : ''}}">
+            <label for="estados_marcados" class="col-sm-2 control-label">Estados Marcados:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="estado_marcado" placeholder="Digite os estados marcados do autômato. Exemplo: X1, X2" required>
-                @if ( $errors->has('estado_marcado') )
+                <input type="text" class="form-control" name="estados_marcados" placeholder="Digite os estados marcados do autômato. Exemplo: X1, X2" required>
+                @if ( $errors->has('estados_marcados') )
                     <span class="help-block">
-                        <strong>{{ $errors->first('estado_marcado') }}</strong>
+                        <strong>{{ $errors->first('estados_marcados') }}</strong>
                     </span>
                 @endif
             </div>

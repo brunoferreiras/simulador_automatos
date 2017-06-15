@@ -17,6 +17,8 @@
 		<!-- Optional theme -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 		<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.0/pnotify.css">
 	</head>
     <body>
         <div class="container">
@@ -69,5 +71,37 @@
 	    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	    <!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+        {{-- PNotify --}}
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.0/pnotify.js"></script>
+        @if( session()->has('success') )
+            <script>
+                $(document).ready(function() {
+                    new PNotify({
+                        title: "Sucesso",
+                        type: "success",
+                        text: '{{ session('success') }}',
+                        addclass: 'success',
+                        styling: 'bootstrap3',
+                        hide: true,
+                    });
+                });
+            </script>
+        @endif
+
+        @if( session()->has('error') )
+            <script>
+                $(document).ready(function() {
+                    new PNotify({
+                        title: "Erro!",
+                        type: "error",
+                        text: '{{ session('error') }}',
+                        addclass: 'error',
+                        styling: 'bootstrap3',
+                        hide: true,
+                    });
+                });
+            </script>
+        @endif
     </body>
 </html>

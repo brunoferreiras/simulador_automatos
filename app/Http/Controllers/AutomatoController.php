@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class AutomatoController extends Controller
 {
+    private $automato;
+
+    public function __construct(Automato $automato)
+    {
+        $this->automato = $automato;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -45,21 +52,21 @@ class AutomatoController extends Controller
         ]);
 
         $dados = [
-            'nome' => $request->tag_rfid,
-            'estados' => $request->cod_barras,
-            'eventos' => $request->produto,
-            'relacao_estados_eventos' => trim($request->descricao),
-            'estado_inicial' => $request->quantidade,
-            'estados_marcados' => $request->quantidade,
+            'nome' => trim($request->nome),
+            'estados' => trim($request->estados),
+            'eventos' => trim($request->eventos),
+            'relacao_estados_eventos' => trim($request->relacao_estados_eventos),
+            'estado_inicial' => trim($request->estado_inicial),
+            'estados_marcados' => trim($request->estados_marcados)
         ];
 
-        $criado = $this->produto->create($dados);
+        $criado = $this->automato->create($dados);
 
         if($criado){
-            return redirect()->route('automatos.index')->with('success', 'Produto cadastrado com sucesso!');
+            return redirect()->route('automatos.index')->with('success', 'Autômato cadastrado com sucesso!');
         }
         else{
-            return redirect()->route('automatos.index')->with('error', 'Não foi possível cadastrar o produto! Por favor, tente novamente!');
+            return redirect()->route('automatos.index')->with('error', 'Não foi possível cadastrar o autômato! Por favor, tente novamente!');
         }
         
         return redirect(route('automatos.index'));

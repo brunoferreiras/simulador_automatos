@@ -106,7 +106,23 @@ class AutomatoController extends Controller
      */
     public function update(Request $request, Automato $automato)
     {
-        return redirect(route('automatos.index'));
+        $this->validate($request,[
+            'nome' => 'required|unique:automatos',
+            'estados' => 'required',
+            'eventos' => 'required',
+            'relacao_estados_eventos' => 'required',
+            'estado_inicial' => 'required',
+            'estados_marcados' => 'required'
+        ]);
+
+        $update = $this->automato->find($automato->id)->update($request->all());
+
+        if($update){
+            return redirect()->route('automatos.index')->with('success', 'Autômato editado com sucesso!');
+        }
+        else{
+            return redirect()->route('automatos.index')->with('error', 'Não foi possível editar o autômato! Por favor, tente novamente!');
+        }
     }
 
     /**

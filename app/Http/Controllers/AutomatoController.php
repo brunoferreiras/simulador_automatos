@@ -21,7 +21,8 @@ class AutomatoController extends Controller
      */
     public function index()
     {
-        return view('automatos.index');
+        $automatos = $this->automato->get();
+        return view('automatos.index', compact('automatos'));
     }
 
     /**

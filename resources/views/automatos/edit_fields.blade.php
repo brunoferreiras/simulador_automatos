@@ -13,8 +13,7 @@
 <div class="form-group {{ $errors->has('estados') ? ' has-error' : ''}}">
     <label for="estados" class="col-sm-2 control-label">Estados:</label>
     <div class="col-sm-10">
-        <input type="text" class="form-control" name="estados" value="{{ $automato->estados }}" placeholder="Digite os
-        estados do autômato." required>
+        <input type="text" class="form-control" name="estados" value="{{ $automato->estados }}" placeholder="Digite os estados do autômato." required>
         <p class="help-block"">Exemplo: X1, X2, X3</p>
         @if ( $errors->has('estados') )
             <span class="help-block">

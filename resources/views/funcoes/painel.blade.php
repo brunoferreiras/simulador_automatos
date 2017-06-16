@@ -6,7 +6,7 @@
             Funções dos Autômatos
         </h1>
     </section>
-    <form class="form-horizontal" role="form" action="{{ route('automatos.store') }}" method="POST">
+    <form class="form-horizontal" role="form" action="{{ route('resultado_funcao') }}" method="POST">
         {{ csrf_field() }}
         <div class="form-group">
             <label for="automato" class="control-label">Escolha o autômato</label>

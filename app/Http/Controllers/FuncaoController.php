@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Automato;
-use function Sodium\add;
 
 class FuncaoController extends Controller
 {
@@ -143,4 +142,13 @@ class FuncaoController extends Controller
 
     }
 
+    public function composicaoProduto()
+    {
+
+    }
+
+    public function composicaoParalela()
+    {
+
+    }
 }

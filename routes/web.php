@@ -17,7 +17,7 @@ Route::get('/funcoes', 'DashboardController@funcoes')->name('funcoes');
 Route::get('/operacoes', 'DashboardController@operacoes')->name('operacoes');
 
 // Funções
-Route::post('/');
-
+Route::post('/resultado/funcao', 'ResultadoController@resultadoFuncao')->name('resultado_funcao');
 
 // Operações
+Route::post('/resultado/operacao', 'ResultadoController@resultadoOperacao')->name('resultado_operacao');

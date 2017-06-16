@@ -102,7 +102,7 @@
 
             nodes.push(start);
             for(indice in arrayNodes) {
-                item = {
+                var item = {
                     id: arrayNodes[indice],
                     label: arrayNodes[indice]
                 };
@@ -118,11 +118,20 @@
 
             edges.push({from: 'start', to: estadoInicial});
 
+            var edgesStringCompleto = '{{ $edges }}';
+            var linhas = edgesStringCompleto.split(";");
 
+            for(i in linhas) {
+                var relacao = linhas[i].split("|");
+                var edge = {
+                    from: relacao[0],
+                    to: relacao[1],
+                    label: relacao[2]
+                };
+                edges.push(edge);
+            }
 
-
-
-            console.log(edges);
+//            console.log(edges);
             var edges = new vis.DataSet(edges);
 
             // Cria o autômato

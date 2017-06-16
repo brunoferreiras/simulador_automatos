@@ -18,7 +18,13 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+		<!-- Pnotify -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.0/pnotify.css">
+
+		<!- VisJS -->
+		<link href="http://visjs.org/dist/vis-network.min.css" rel="stylesheet" type="text/css" />
+
+        @yield('styles')
 	</head>
     <body>
         <div class="container">
@@ -71,17 +77,12 @@
 	    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	    <!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-		{{-- ArborJS --}}
-        {{--<script src="{{ asset('/js/arborjs/lib/arbor.js') }}"></script>--}}
-        {{--<script src="{{ asset('/js/arborjs/lib/arbor-tween.js') }}"></script>--}}
-        {{--<script src="{{ asset('/js/springy-master/springy.js') }}"></script>--}}
-        {{--<script src="{{ asset('/js/springy-master/springyui.js') }}"></script>--}}
-        <script src="{{ asset('/js/code/cytoscape.min.js') }}"></script>
-{{--        <script src="{{ asset('/js/code/code.js') }}"></script>--}}
+		<!-- VisJS -->
+		<script src="http://visjs.org/dist/vis.js"></script>
 
         @yield('scripts')
 
-        {{-- PNotify --}}
+        <!-- PNotify -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.0/pnotify.js"></script>
         @if( session()->has('success') )
             <script>

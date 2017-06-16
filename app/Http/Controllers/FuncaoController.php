@@ -75,21 +75,26 @@ class FuncaoController extends Controller
 
             $i = 0;
             foreach($relacaoIndividual as $unidade) {
-                $array[trim($unidade)] = trim($unidade);
                 $unidade = trim($unidade);
                 if($unidade != '-') {
-                    $obj = [
+                    $edge = [
                         "from" => $estado,
                         "to" => $unidade,
                         "label" => $this->getEventById($i)
                     ];
-                    $edges[] = $obj;
+                    $edges[] = $edge;
                 }
                 $i++;
             }
         }
-        dd($edges);
-        return $edges;
+
+        $linhas = array();
+        foreach ($edges as $edge) {
+            $linha = implode("|", $edge);
+            $linhas[] = $linha;
+        }
+        $relacoes = implode(";", $linhas);
+        return $relacoes;
     }
 
     public function getEstadosMarcados()

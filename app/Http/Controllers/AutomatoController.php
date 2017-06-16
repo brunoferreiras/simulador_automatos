@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Automato;
 use Illuminate\Http\Request;
+use App\Http\Controllers\FuncaoController as FuncaoAutomato;
 
 class AutomatoController extends Controller
 {
@@ -82,6 +83,13 @@ class AutomatoController extends Controller
     public function show(Automato $automato)
     {
         $automato = $this->automato->find($automato->id);
+
+        $funcoes = new FuncaoAutomato($automato);
+        $nodes = $funcoes->getNodes();
+        $edges = $funcoes->getEdges();
+        $estadosMarcados = $funcoes->getEstadosMarcados();
+        $estadoInicial = $funcoes->getEstadoInicial();
+
         return view('automatos.show', compact('automato'));
     }
 

@@ -88,11 +88,11 @@
             // Cria os estados do autômato
 
             var stringArrayNodes = "{{ $nodes }}";
-            arrayNodes = stringArrayNodes.split("|");
+            var arrayNodes = stringArrayNodes.split("|");
 
             var nodes = [];
 
-            start = {
+            var start = {
                 id: 'start',
                 label: 'Estado Inicial',
                 font: {
@@ -121,7 +121,7 @@
             var edgesStringCompleto = '{{ $edges }}';
             var linhas = edgesStringCompleto.split(";");
 
-            for(i in linhas) {
+            for(var i in linhas) {
                 var relacao = linhas[i].split("|");
                 var edge = {
                     from: relacao[0],
@@ -189,16 +189,26 @@
             var network = new vis.Network(container, data, options);
 
             // Onde vai ser definido os estados marcados
-    {{--        {{ $estadosMarcados }}--}}
-            network.on("afterDrawing", function (ctx) {
-                var nodeId = 0;
-                var nodePosition = network.getPositions([nodeId]);
-                ctx.strokeStyle = '#343434';
-                ctx.lineWidth = 2;
-                ctx.fillStyle = '#A6D5F7';
-                ctx.circle(nodePosition[nodeId].x, nodePosition[nodeId].y,18);
-                ctx.stroke();
-            });
+            var estadosMarcadosString = '{{ $estadosMarcados }}';
+
+            var estadosMarcados = estadosMarcadosString.split("|");
+            console.log(estadosMarcados);
+
+            for(var i in estadosMarcados) {
+                gerarMarcacao(estadosMarcados[i]);
+            }
+
+            function gerarMarcacao(index) {
+                network.on("afterDrawing", function (ctx) {
+                    var nodeId = index;
+                    var nodePosition = network.getPositions([nodeId]);
+                    ctx.strokeStyle = '#343434';
+                    ctx.lineWidth = 2;
+                    ctx.fillStyle = '#A6D5F7';
+                    ctx.circle(nodePosition[nodeId].x, nodePosition[nodeId].y,18);
+                    ctx.stroke();
+                });
+            }
         });
     </script>
 @endsection

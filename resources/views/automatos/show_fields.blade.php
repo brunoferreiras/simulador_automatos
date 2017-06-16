@@ -115,6 +115,29 @@
             // Cria as transições do autômato
     {{--        {{ $edges }}--}}
     {{--        {{ $estadoInicial }}--}}
+            var stringArrayEdges = "{{ $edges }}";
+            arrayEdges = stringArrayNodes.split("|");
+
+            var edges = [];
+
+            start = {
+                id: 'start',
+                label: 'Estado Inicial',
+                font: {
+                    size: 14
+                }
+            };
+
+            edges.push(start);
+            for(indice in arrayEdges) {
+                item = {
+                    id: arrayEdges[indice],
+                    label: arrayEdges[indice]
+                };
+                edges.push(item);
+            }
+            console.log(edges);
+
             var edges = new vis.DataSet([
                 {from: 'start', to: 0},
                 {from: 0, to: 0, label: 'a'},

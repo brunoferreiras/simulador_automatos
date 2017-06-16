@@ -58,6 +58,6 @@ class FuncaoController extends Controller
 
     public function getEstadoInicial()
     {
-        return "estado inicial";
+        return trim($this->estadoInicial);
     }
 }

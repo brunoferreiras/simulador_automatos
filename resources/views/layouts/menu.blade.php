@@ -42,26 +42,10 @@
 	          </div>
 	          <div id="navbar" class="navbar-collapse collapse">
 	            <ul class="nav navbar-nav">
-	              <li class="active"><a href="{{ url('') }}">Página Inicial</a></li>
+	              <li><a href="{{ url('') }}">Página Inicial</a></li>
 	              <li><a href="{{ route('automatos.index') }}">Autômatos</a></li>
-	              <li class="dropdown">
-	                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Funções dos Autômatos <span class="caret"></span></a>
-	                <ul class="dropdown-menu">
-	                  <li><a href="#">Linguagem Gerada</a></li>
-	                  <li><a href="#">Linguagem Marcada</a></li>
-	                  <li><a href="#">Parte Acessível</a></li>
-	                  <li><a href="#">Parte CoAcessível</a></li>
-	                  <li><a href="#">TRIM</a></li>
-	                  <li><a href="#">Complemento</a></li>
-	                </ul>
-	              </li>
-	              <li class="dropdown">
-	                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Operações com Autômatos <span class="caret"></span></a>
-	                <ul class="dropdown-menu">
-	                  <li><a href="#">Composição Produto</a></li>
-	                  <li><a href="#">Composição Paralela</a></li>
-	                </ul>
-	              </li>
+	              <li><a href="{{ route('funcoes') }}">Funções dos Autômatos</a></li>
+	              <li><a href="{{ route('operacoes') }}">Operações com Autômatos</a></li>
 	            </ul>
 	          </div><!--/.nav-collapse -->
 	        </div><!--/.container-fluid -->

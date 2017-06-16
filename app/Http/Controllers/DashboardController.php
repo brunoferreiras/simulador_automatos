@@ -10,4 +10,14 @@ class DashboardController extends Controller
     {
     	return view('home');
     }
+
+    public function funcoes()
+    {
+        return "TETE";
+    }
+
+    public function operacoes()
+    {
+        return "operacoe";
+    }
 }

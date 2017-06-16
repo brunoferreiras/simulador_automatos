@@ -112,4 +112,35 @@ class FuncaoController extends Controller
     {
         return trim($this->estadoInicial);
     }
+
+    public function linguagemGerada()
+    {
+
+    }
+
+    public function linguagemMarcada()
+    {
+
+    }
+
+    public function parteAcessivel()
+    {
+
+    }
+
+    public function parteCoAcessivel()
+    {
+
+    }
+
+    public function trim()
+    {
+
+    }
+
+    public function complemento()
+    {
+
+    }
+
 }

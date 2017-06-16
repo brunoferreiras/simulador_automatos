@@ -90,7 +90,10 @@ class AutomatoController extends Controller
         $estadosMarcados = $funcoes->getEstadosMarcados();
         $estadoInicial = $funcoes->getEstadoInicial();
 
-        return view('automatos.show', compact('automato'));
+//        dd($nodes);
+        return view('automatos.show')
+            ->with('automato', $automato)
+            ->with('nodes', $nodes);
     }
 
     /**

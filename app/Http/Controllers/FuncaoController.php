@@ -30,7 +30,15 @@ class FuncaoController extends Controller
 
     public function getNodes()
     {
-        return "getNodes";
+
+        $estados = explode(",", $this->estados);
+        $arrayEstados = array();
+
+        foreach($estados as $estado) {
+            $arrayEstados[trim($estado)] = trim($estado);
+        }
+
+        return implode("|",$arrayEstados);
     }
 
     public function getEvents()

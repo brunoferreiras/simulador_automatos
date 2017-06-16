@@ -55,7 +55,11 @@ class FuncaoController extends Controller
 
     public function getEdges()
     {
-        return "getEdges";
+        $edges = [
+            'from' => 'start',
+            'to' => 0
+        ];
+        return $edges;
     }
 
     public function getEstadosMarcados()

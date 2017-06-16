@@ -108,45 +108,17 @@
                 };
                 nodes.push(item);
             }
-            console.log(nodes);
+//            console.log(nodes);
 
             var nodes = new vis.DataSet(nodes);
 
             // Cria as transições do autômato
-    {{--        {{ $edges }}--}}
-    {{--        {{ $estadoInicial }}--}}
-            {{--var stringArrayEdges = "{{ $edges }}";--}}
-            {{--arrayEdges = stringArrayNodes.split("|");--}}
+            var edges = [];
+            var estadoInicial = {{ $estadoInicial }};
+            edges.push({from: 'start', to: estadoInicial});
 
-            {{--var edges = [];--}}
-
-            {{--start = {--}}
-                {{--id: 'start',--}}
-                {{--label: 'Estado Inicial',--}}
-                {{--font: {--}}
-                    {{--size: 14--}}
-                {{--}--}}
-            {{--};--}}
-
-            {{--edges.push(start);--}}
-            {{--for(indice in arrayEdges) {--}}
-                {{--item = {--}}
-                    {{--id: arrayEdges[indice],--}}
-                    {{--label: arrayEdges[indice]--}}
-                {{--};--}}
-                {{--edges.push(item);--}}
-            {{--}--}}
-            {{--console.log(edges);--}}
-
-            var edges = new vis.DataSet([
-                {from: 'start', to: 0},
-                {from: 0, to: 0, label: 'a'},
-                {from: 0, to: 1, label: 'b'},
-                {from: 1, to: 0, label: 'a'},
-                {from: 1, to: 3, label: 'b'},
-                {from: 1, to: 2, label: 'c'},
-                {from: 3, to: 0, label: 'a'}
-            ]);
+            console.log(edges);
+            var edges = new vis.DataSet(edges);
 
             // Cria o autômato
             var container = document.getElementById('myautomato');

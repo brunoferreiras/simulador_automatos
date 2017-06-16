@@ -87,15 +87,18 @@ class AutomatoController extends Controller
         $funcoes = new FuncaoAutomato($automato);
         $nodes = $funcoes->getNodes();
         $edges = $funcoes->getEdges();
+        $eventos = $funcoes->getEvents();
         $estadosMarcados = $funcoes->getEstadosMarcados();
         $estadoInicial = $funcoes->getEstadoInicial();
 
-        dd($estadoInicial);
+        dd($estadosMarcados);
         return view('automatos.show')
             ->with('automato', $automato)
             ->with('nodes', $nodes)
-            -with('edges', $edges)
-            -with('estadoInicial', $estadoInicial);
+            ->with('edges', $edges)
+            ->with('eventos', $eventos)
+            ->with('estadoInicial', $estadoInicial)
+            ->with('estadosMarcados', $estadosMarcados);
     }
 
     /**

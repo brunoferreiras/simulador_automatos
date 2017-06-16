@@ -53,7 +53,13 @@ class FuncaoController extends Controller
 
     public function getEstadosMarcados()
     {
-        return "getEstadosMarcados";
+        $estadosMarcados = explode(",", $this->estadosMarcados);
+        $arrayEstadosMarcados = array();
+
+        foreach($estadosMarcados as $estadoMarcado) {
+            $arrayEstadosMarcados[trim($estadoMarcado)] = trim($estadoMarcado);
+        }
+        return $arrayEstadosMarcados;
     }
 
     public function getEstadoInicial()

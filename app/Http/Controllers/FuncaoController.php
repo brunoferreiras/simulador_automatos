@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Automato;
+use function Sodium\add;
 
 class FuncaoController extends Controller
 {
@@ -47,18 +48,47 @@ class FuncaoController extends Controller
         $arrayEventos = array();
 
         foreach($eventos as $evento) {
-            $arrayEventos[trim($evento)] = trim($evento);
+            $arrayEventos[] = trim($evento);
         }
 
-        return implode("|",$arrayEventos);
+        return $arrayEventos;
+    }
+
+    public function getEventById($id)
+    {
+        $eventos = $this->getEvents();
+        return $eventos[$id];
     }
 
     public function getEdges()
     {
-        $edges = [
-            'from' => 'start',
-            'to' => 0
-        ];
+        $linhas = explode(";", $this->relacao);
+        $edges = array();
+        array_pop($linhas);
+
+        foreach ($linhas as $linha) {
+            $divisor = explode('->', $linha);
+            $estado = trim($divisor[0]);
+            $relacoesEstado = $divisor[1];
+
+            $relacaoIndividual = explode('|', $relacoesEstado);
+
+            $i = 0;
+            foreach($relacaoIndividual as $unidade) {
+                $array[trim($unidade)] = trim($unidade);
+                $unidade = trim($unidade);
+                if($unidade != '-') {
+                    $obj = [
+                        "from" => $estado,
+                        "to" => $unidade,
+                        "label" => $this->getEventById($i)
+                    ];
+                    $edges[] = $obj;
+                }
+                $i++;
+            }
+        }
+        dd($edges);
         return $edges;
     }
 

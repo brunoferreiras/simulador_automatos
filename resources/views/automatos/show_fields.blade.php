@@ -115,7 +115,12 @@
             // Cria as transições do autômato
             var edges = [];
             var estadoInicial = {{ $estadoInicial }};
+
             edges.push({from: 'start', to: estadoInicial});
+
+
+
+
 
             console.log(edges);
             var edges = new vis.DataSet(edges);

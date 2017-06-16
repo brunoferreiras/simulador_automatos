@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Automato;
 use Illuminate\Http\Request;
-use App\Http\Controllers\FuncaoController;
+
 class ResultadoController extends Controller
 {
     private $automato;

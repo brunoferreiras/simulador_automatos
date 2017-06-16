@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Automato;
 use Illuminate\Http\Request;
-use App\Http\Controllers\FuncaoController as FuncaoAutomato;
+use App\Http\Controllers\GeraAutomatoController as GeraAutomato;
 
 class AutomatoController extends Controller
 {
@@ -84,7 +84,7 @@ class AutomatoController extends Controller
     {
         $automato = $this->automato->find($automato->id);
 
-        $funcoes = new FuncaoAutomato($automato);
+        $funcoes = new GeraAutomato($automato);
         $nodes = $funcoes->getNodes();
         $edges = $funcoes->getEdges();
         $eventos = $funcoes->getEvents();

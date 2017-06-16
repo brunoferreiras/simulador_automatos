@@ -59,7 +59,7 @@ class FuncaoController extends Controller
         foreach($estadosMarcados as $estadoMarcado) {
             $arrayEstadosMarcados[trim($estadoMarcado)] = trim($estadoMarcado);
         }
-        return $arrayEstadosMarcados;
+        return implode("|",$arrayEstadosMarcados);
     }
 
     public function getEstadoInicial()

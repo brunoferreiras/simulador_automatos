@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Automato as Automato;
 
 class DashboardController extends Controller
 {
@@ -13,11 +14,13 @@ class DashboardController extends Controller
 
     public function funcoes()
     {
-        return "TETE";
+        $automatos = Automato::get();
+        return view('funcoes.painel', compact('automatos'));
     }
 
     public function operacoes()
     {
-        return "operacoe";
+        $automatos = Automato::get();
+        return view('operacoes.painel', compact('automatos'));
     }
 }

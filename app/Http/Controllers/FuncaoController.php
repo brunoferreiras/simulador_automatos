@@ -43,7 +43,14 @@ class FuncaoController extends Controller
 
     public function getEvents()
     {
-        return "getEvents";
+        $eventos = explode(",", $this->eventos);
+        $arrayEventos = array();
+
+        foreach($eventos as $evento) {
+            $arrayEventos[trim($evento)] = trim($evento);
+        }
+
+        return implode("|",$arrayEventos);
     }
 
     public function getEdges()

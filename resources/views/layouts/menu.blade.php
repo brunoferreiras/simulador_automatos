@@ -55,8 +55,7 @@
 	      @yield('content')
 
 	      <!-- Main component for a primary marketing message or call to action -->
-	      
-		
+	      		
 	    </div> <!-- /container -->
 	    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	    <!-- Latest compiled and minified JavaScript -->

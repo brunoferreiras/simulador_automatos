@@ -28,6 +28,11 @@ class GeraAutomatoController extends Controller
         $this->estadosMarcados = $automato->estados_marcados;
     }
 
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
     public function getNodes()
     {
 

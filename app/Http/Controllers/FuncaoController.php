@@ -18,10 +18,16 @@ class FuncaoController extends Controller
     public function __construct(Automato $automato)
     {
         $this->automato = new GeraAutomatoController($automato);
+        $this->nome = $this->automato->getNome();
         $this->setEventos($this->automato->getEvents());
         $this->setEstados($this->automato->getNodes());
         $this->setRelacao($this->automato->getEdges());
+        $this->estadoInicial = $this->automato->getEstadoInicial();
         $this->setEstadosMarcados($this->automato->getEstadosMarcados());
+    }
+
+    public function getNome() {
+        return $this->nome;
     }
 
     public function setEstados($estados)

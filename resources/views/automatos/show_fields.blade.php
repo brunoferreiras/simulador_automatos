@@ -67,16 +67,6 @@
     </div>
 </fieldset>
 
-@section('styles')
-    <style type="text/css">
-        #myautomato {
-            width: 100%;
-            height: 600px;
-            border: 1px solid lightgray;
-        }
-    </style>
-@endsection
-
 <fieldset>
     <legend>Gráfico do autômato</legend>
     <div id="myautomato"></div>

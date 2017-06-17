@@ -24,7 +24,13 @@
 		<!- VisJS -->
 		<link href="http://visjs.org/dist/vis-network.min.css" rel="stylesheet" type="text/css" />
 
-        @yield('styles')
+        <style type="text/css">
+            #myautomato {
+                width: 100%;
+                height: 600px;
+                border: 1px solid lightgray;
+            }
+        </style>
 	</head>
     <body>
         <div class="container">
@@ -55,7 +61,7 @@
 	      @yield('content')
 
 	      <!-- Main component for a primary marketing message or call to action -->
-	      		
+
 	    </div> <!-- /container -->
 	    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	    <!-- Latest compiled and minified JavaScript -->

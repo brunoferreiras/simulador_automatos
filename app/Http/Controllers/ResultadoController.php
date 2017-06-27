@@ -12,8 +12,7 @@ class ResultadoController extends Controller
 
     public function resultadoFuncao(Request $request)
     {
-        $automato = Automato::find($request->automato);
-        $this->automato = new FuncaoController($automato);
+        $this->automato = Automato::find($request->automato);
         $this->funcao = $request->funcao;
 
         switch ($this->funcao) {
@@ -90,11 +89,20 @@ class ResultadoController extends Controller
         return view('resultados.funcao', compact('title', 'possuiGrafico'));
     }
 
-    public function resultadoParteAcessivel($automato)
+    public function resultadoParteAcessivel()
     {
         $title = "Parte Acessível";
         $possuiGrafico = true;
+        $automato = new FuncaoController($this->automato);
+        $automatoResultante = $automato->parteAcessivel();
+        dd($automatoResultante);
         return view('resultados.funcao', compact('title', 'possuiGrafico'));
+//                ->with('automato', $automato)
+//                ->with('nodes', $nodes)
+//                ->with('edges', $edges)
+//                ->with('eventos', $eventos)
+//                ->with('estadoInicial', $estadoInicial)
+//                ->with('estadosMarcados', $estadosMarcados);
     }
 
     public function resultadoParteCoAcessivel($automato)

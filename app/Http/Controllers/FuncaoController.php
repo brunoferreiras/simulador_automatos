@@ -69,7 +69,30 @@ class FuncaoController extends Controller
 
     public function parteAcessivel()
     {
+//        dd($this->relacao);
+        $nome = "Parte acessível";
+        $relacoes = $this->relacao;
+        $estados = $this->estados;
+        $eventos = $this->eventos;
+        $estadosMarcados = $this->estadosMarcados;
+        $estadoInicial = $this->estadoInicial;
 
+        foreach($relacoes as $relacao) {
+            $relacao[0]; // Local de saída da seta
+        }
+        die();
+
+        $nome = $funcoes->getNome();
+        $nodes = $funcoes->getNodes();
+        $edges = $funcoes->getEdges();
+        $eventos = $funcoes->getEvents();
+        $estadosMarcados = $funcoes->getEstadosMarcados();
+        $estadoInicial = $funcoes->getEstadoInicial();
+
+        dd($nome);
+        $automatoParteAcessivel = '';
+
+        return $automatoParteAcessivel;
     }
 
     public function parteCoAcessivel()

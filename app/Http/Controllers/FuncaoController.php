@@ -69,16 +69,19 @@ class FuncaoController extends Controller
 
     public function parteAcessivel()
     {
-//        dd($this->relacao);
-        $nome = "Parte acessível";
-        $relacoes = $this->relacao;
-        $estados = $this->estados;
-        $eventos = $this->eventos;
-        $estadosMarcados = $this->estadosMarcados;
-        $estadoInicial = $this->estadoInicial;
+        $nomeParteAcessivel = "Parte acessível do autômato: " . $this->automato->getNome();
+//        $estadosParteAcessivel = $this->estados;
+        $eventosParteAcessivel = $this->eventos;
+        $estadosMarcadosParteAcessivel = $this->estadosMarcados;
+        $estadoInicialParteAcessivel = $this->estadoInicial;
+        $relacaoParteAcessivel = '';
 
-        foreach($relacoes as $relacao) {
-            $relacao[0]; // Local de saída da seta
+        foreach($this->relacao as $relacao) {
+            var_dump($relacao);
+            $from = $relacao[0];
+            $to = $relacao[1];
+            $label = $relacao[2];
+            $relacaoParteAcessivel[] = $relacao;
         }
         die();
 
@@ -90,7 +93,14 @@ class FuncaoController extends Controller
         $estadoInicial = $funcoes->getEstadoInicial();
 
         dd($nome);
-        $automatoParteAcessivel = '';
+        $automatoParteAcessivel = (object) [
+            'nome' => $nomeParteAcessivel,
+            'estados' => $estadosParteAcessivel,
+            'eventos' => $eventosParteAcessivel,
+            'estadoInicial' => $estadoInicialParteAcessivel,
+            'estadosMarcados' => $estadosMarcadosParteAcessivel,
+            'relacao' => $relacaoParteAcessivel
+        ];
 
         return $automatoParteAcessivel;
     }

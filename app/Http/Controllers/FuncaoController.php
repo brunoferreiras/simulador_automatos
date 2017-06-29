@@ -146,15 +146,10 @@ class FuncaoController extends Controller
     {
         $nomeComplemento = "Complemento do autômato: " . $this->automato->getNome();
         $eventosComplemento = $this->eventos;
-        $estadosComplemento = $this->estados;
-        
+        $estadosComplemento = $this->estados;        
         $estadoInicialComplemento = $this->estadoInicial;
 
-        $relacaoComplemento = array();
-        // $estadosMarcadosComplemento = array();
-        $estadosComplemento[] = 'd'; // Adiciona o estado d (dump)
-        $capturaEstadosNaoMarcados = array();
-
+        $estadosComplemento[] = 'dump'; // Adiciona o estado d (dump)
         
         // Inverte a marcação dos estados
         $estadosMarcadosComplemento = $estadosComplemento;
@@ -164,6 +159,25 @@ class FuncaoController extends Controller
                 unset($estadosMarcadosComplemento[$indexValue]);    
             }
         }
+
+        $relacaoComplemento = array();
+        foreach ($estadosComplemento as $estado) {            
+            foreach ($eventosComplemento as $evento) {
+                foreach ($this->relacao as $relacao) {
+                    $from = $relacao[0];
+                    $to = $relacao[1];
+                    $label = $relacao[2];
+                    if(($from == $estado) && ($label == $evento)) {
+                        $relacaoComplemento[] = [$from, $to, $label];
+                        $status = true;
+                    } elseif() {
+                        $relacaoComplemento[] = [$estado, 'dump', $evento];
+                    }
+                }
+            }
+        }
+        // $relacaoComplemento = array_unique($relacaoComplemento);
+        dd($relacaoComplemento);
 
         // Gera um objeto contendo o autômato parte acessível
         $automatoComplemento = (object) [

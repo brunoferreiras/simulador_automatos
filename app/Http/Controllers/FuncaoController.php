@@ -70,29 +70,56 @@ class FuncaoController extends Controller
     public function parteAcessivel()
     {
         $nomeParteAcessivel = "Parte acessível do autômato: " . $this->automato->getNome();
-//        $estadosParteAcessivel = $this->estados;
+        $estadosParteAcessivel = array();
         $eventosParteAcessivel = $this->eventos;
         $estadosMarcadosParteAcessivel = $this->estadosMarcados;
         $estadoInicialParteAcessivel = $this->estadoInicial;
-        $relacaoParteAcessivel = '';
 
-        foreach($this->relacao as $relacao) {
-            var_dump($relacao);
-            $from = $relacao[0];
-            $to = $relacao[1];
-            $label = $relacao[2];
-            $relacaoParteAcessivel[] = $relacao;
+        $relacaoParteAcessivel = array();
+        $estadosNaoAcessiveis = array();
+
+        foreach ($this->estados as $estado) {
+            $acessivel = false;
+            foreach($this->relacao as $relacao) {
+                $to = $relacao[1];
+
+                if($estado == $to) {
+                    $acessivel = true;
+                }
+            }
+
+            if(!$acessivel) {
+                $estadosNaoAcessiveis[] = $estado;
+            }
         }
-        die();
 
-        $nome = $funcoes->getNome();
-        $nodes = $funcoes->getNodes();
-        $edges = $funcoes->getEdges();
-        $eventos = $funcoes->getEvents();
-        $estadosMarcados = $funcoes->getEstadosMarcados();
-        $estadoInicial = $funcoes->getEstadoInicial();
+        // Gera as novas relações do autômato parte acessível
+        foreach ($estadosNaoAcessiveis as $estadoNaoAcessivel) {
+            foreach($this->relacao as $relacao) {
+                $from = $relacao[0];
+                $to = $relacao[1];
+                $label = $relacao[2];
 
-        dd($nome);
+                if($estadoNaoAcessivel != $from) {
+                    $relacaoParteAcessivel[] = [$from, $to, $label];
+                }
+            }
+        }
+
+        // Retira os estados que não são acessíveis
+        foreach ($this->estados as $estado) {
+            $acessivel = true;
+            foreach ($estadosNaoAcessiveis as $estadoNaoAcessivel) {
+                if($estado == $estadoNaoAcessivel) {
+                    $acessivel = false;
+                }
+            }
+            if($acessivel) {
+                $estadosParteAcessivel[] = $estado;
+            }
+        }
+
+        // Gera um objeto contendo o autômato parte acessível
         $automatoParteAcessivel = (object) [
             'nome' => $nomeParteAcessivel,
             'estados' => $estadosParteAcessivel,

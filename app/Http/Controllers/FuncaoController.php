@@ -146,14 +146,25 @@ class FuncaoController extends Controller
     {
         $nomeComplemento = "Complemento do autômato: " . $this->automato->getNome();
         $eventosComplemento = $this->eventos;
-        $estadosComplemento = $this->estadosMarcados;
+        $estadosComplemento = $this->estados;
+        
         $estadoInicialComplemento = $this->estadoInicial;
 
         $relacaoComplemento = array();
-        $estadosComplemento = array();
-        $estadosComplemento = array();
+        // $estadosMarcadosComplemento = array();
+        $estadosComplemento[] = 'd'; // Adiciona o estado d (dump)
+        $capturaEstadosNaoMarcados = array();
 
-        dd($nomeComplemento);
+        
+        // Inverte a marcação dos estados
+        $estadosMarcadosComplemento = $estadosComplemento;
+        foreach ($this->estadosMarcados as $estadoMarcado) {
+            $indexValue = array_search($estadoMarcado, $estadosComplemento);
+            if($indexValue) {
+                unset($estadosMarcadosComplemento[$indexValue]);    
+            }
+        }
+
         // Gera um objeto contendo o autômato parte acessível
         $automatoComplemento = (object) [
             'nome' => $nomeComplemento,

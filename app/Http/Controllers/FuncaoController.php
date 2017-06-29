@@ -57,25 +57,6 @@ class FuncaoController extends Controller
         $this->estadosMarcados = explode("|", $estadosMarcados);
     }
 
-    public function formatNodes($nodes) {
-        $arrayEstados = array();
-        foreach($nodes as $node) {
-            $arrayEstados[trim($node)] = trim($node);
-        }
-
-        return implode("|",$arrayEstados);
-    }
-
-    public function formatEdges($edges) {
-        $linhas = array();
-        foreach ($edges as $edge) {
-            $linha = implode("|", $edge);
-            $linhas[] = $linha;
-        }
-        $relacoes = implode(";", $linhas);
-        return $relacoes;
-    }
-
     public function linguagemGerada()
     {
 
@@ -141,11 +122,11 @@ class FuncaoController extends Controller
         // Gera um objeto contendo o autômato parte acessível
         $automatoParteAcessivel = (object) [
             'nome' => $nomeParteAcessivel,
-            'nodes' => $this->formatNodes($estadosParteAcessivel),
+            'nodes' => $estadosParteAcessivel,
             'eventos' => $eventosParteAcessivel,
             'estadoInicial' => $estadoInicialParteAcessivel,
-            'estadosMarcados' => $this->formatNodes($estadosMarcadosParteAcessivel),
-            'edges' => $this->formatEdges($relacaoParteAcessivel)
+            'estadosMarcados' => $estadosMarcadosParteAcessivel,
+            'edges' => $relacaoParteAcessivel
         ];
 
         return $automatoParteAcessivel;

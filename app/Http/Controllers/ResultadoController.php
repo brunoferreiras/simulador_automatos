@@ -89,6 +89,25 @@ class ResultadoController extends Controller
         return view('resultados.funcao', compact('title', 'possuiGrafico'));
     }
 
+    public function formatNodes($nodes) {
+        $arrayEstados = array();
+        foreach($nodes as $node) {
+            $arrayEstados[trim($node)] = trim($node);
+        }
+
+        return implode("|",$arrayEstados);
+    }
+
+    public function formatEdges($edges) {
+        $linhas = array();
+        foreach ($edges as $edge) {
+            $linha = implode("|", $edge);
+            $linhas[] = $linha;
+        }
+        $relacoes = implode(";", $linhas);
+        return $relacoes;
+    }
+
     public function resultadoParteAcessivel()
     {
         $title = "Parte Acessível";
@@ -100,11 +119,11 @@ class ResultadoController extends Controller
                ->with('title', $title)
                ->with('possuiGrafico', $possuiGrafico)
                ->with('automato', $automatoResultante->nome)
-               ->with('nodes', $automatoResultante->nodes)
-               ->with('edges', $automatoResultante->edges)
+               ->with('nodes', $this->formatNodes($automatoResultante->nodes))
+               ->with('edges', $this->formatEdges($automatoResultante->edges))
                ->with('eventos', $automatoResultante->eventos)
                ->with('estadoInicial', $automatoResultante->estadoInicial)
-               ->with('estadosMarcados', $automatoResultante->estadosMarcados);
+               ->with('estadosMarcados', $this->formatNodes($automatoResultante->estadosMarcados));
     }
 
     public function resultadoParteCoAcessivel($automato)

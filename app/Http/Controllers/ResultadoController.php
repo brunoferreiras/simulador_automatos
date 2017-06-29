@@ -95,14 +95,16 @@ class ResultadoController extends Controller
         $possuiGrafico = true;
         $automato = new FuncaoController($this->automato);
         $automatoResultante = $automato->parteAcessivel();
-        dd($automatoResultante);
-        return view('resultados.funcao', compact('title', 'possuiGrafico'));
-//                ->with('automato', $automato)
-//                ->with('nodes', $nodes)
-//                ->with('edges', $edges)
-//                ->with('eventos', $eventos)
-//                ->with('estadoInicial', $estadoInicial)
-//                ->with('estadosMarcados', $estadosMarcados);
+
+        return view('resultados.funcao')
+               ->with('title', $title)
+               ->with('possuiGrafico', $possuiGrafico)
+               ->with('automato', $automatoResultante->nome)
+               ->with('nodes', $automatoResultante->nodes)
+               ->with('edges', $automatoResultante->edges)
+               ->with('eventos', $automatoResultante->eventos)
+               ->with('estadoInicial', $automatoResultante->estadoInicial)
+               ->with('estadosMarcados', $automatoResultante->estadosMarcados);
     }
 
     public function resultadoParteCoAcessivel($automato)

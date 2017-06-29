@@ -57,6 +57,25 @@ class FuncaoController extends Controller
         $this->estadosMarcados = explode("|", $estadosMarcados);
     }
 
+    public function formatNodes($nodes) {
+        $arrayEstados = array();
+        foreach($nodes as $node) {
+            $arrayEstados[trim($node)] = trim($node);
+        }
+
+        return implode("|",$arrayEstados);
+    }
+
+    public function formatEdges($edges) {
+        $linhas = array();
+        foreach ($edges as $edge) {
+            $linha = implode("|", $edge);
+            $linhas[] = $linha;
+        }
+        $relacoes = implode(";", $linhas);
+        return $relacoes;
+    }
+
     public function linguagemGerada()
     {
 
@@ -70,13 +89,13 @@ class FuncaoController extends Controller
     public function parteAcessivel()
     {
         $nomeParteAcessivel = "Parte acessível do autômato: " . $this->automato->getNome();
-        $estadosParteAcessivel = array();
         $eventosParteAcessivel = $this->eventos;
         $estadosMarcadosParteAcessivel = $this->estadosMarcados;
         $estadoInicialParteAcessivel = $this->estadoInicial;
 
         $relacaoParteAcessivel = array();
         $estadosNaoAcessiveis = array();
+        $estadosParteAcessivel = array();
 
         foreach ($this->estados as $estado) {
             $acessivel = false;
@@ -122,11 +141,11 @@ class FuncaoController extends Controller
         // Gera um objeto contendo o autômato parte acessível
         $automatoParteAcessivel = (object) [
             'nome' => $nomeParteAcessivel,
-            'estados' => $estadosParteAcessivel,
+            'nodes' => $this->formatNodes($estadosParteAcessivel),
             'eventos' => $eventosParteAcessivel,
             'estadoInicial' => $estadoInicialParteAcessivel,
-            'estadosMarcados' => $estadosMarcadosParteAcessivel,
-            'relacao' => $relacaoParteAcessivel
+            'estadosMarcados' => $this->formatNodes($estadosMarcadosParteAcessivel),
+            'edges' => $this->formatEdges($relacaoParteAcessivel)
         ];
 
         return $automatoParteAcessivel;

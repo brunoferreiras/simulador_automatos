@@ -144,7 +144,27 @@ class FuncaoController extends Controller
 
     public function complemento()
     {
+        $nomeComplemento = "Complemento do autômato: " . $this->automato->getNome();
+        $eventosComplemento = $this->eventos;
+        $estadosComplemento = $this->estadosMarcados;
+        $estadoInicialComplemento = $this->estadoInicial;
 
+        $relacaoComplemento = array();
+        $estadosComplemento = array();
+        $estadosComplemento = array();
+
+        dd($nomeComplemento);
+        // Gera um objeto contendo o autômato parte acessível
+        $automatoComplemento = (object) [
+            'nome' => $nomeComplemento,
+            'nodes' => $estadosComplemento,
+            'eventos' => $eventosComplemento,
+            'estadoInicial' => $estadoInicialComplemento,
+            'estadosMarcados' => $estadosComplemento,
+            'edges' => $relacaoComplemento
+        ];
+
+        return $automatoParteAcessivel;
     }
 
     public function composicaoProduto()

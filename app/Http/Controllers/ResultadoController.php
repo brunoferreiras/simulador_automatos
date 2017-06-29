@@ -144,7 +144,18 @@ class ResultadoController extends Controller
     {
         $title = "Complemento";
         $possuiGrafico = true;
-        return view('resultados.funcao', compact('title', 'possuiGrafico'));
+        $automato = new FuncaoController($this->automato);
+        $automatoResultante = $automato->complemento();
+
+        return view('resultados.funcao')
+               ->with('title', $title)
+               ->with('possuiGrafico', $possuiGrafico)
+               ->with('automato', $automatoResultante->nome)
+               ->with('nodes', $this->formatNodes($automatoResultante->nodes))
+               ->with('edges', $this->formatEdges($automatoResultante->edges))
+               ->with('eventos', $automatoResultante->eventos)
+               ->with('estadoInicial', $automatoResultante->estadoInicial)
+               ->with('estadosMarcados', $this->formatNodes($automatoResultante->estadosMarcados));
     }
 
     public function resultadoComposicaoProduto($automato1, $automato2)

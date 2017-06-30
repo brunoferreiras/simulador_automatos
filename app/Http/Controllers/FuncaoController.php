@@ -161,21 +161,33 @@ class FuncaoController extends Controller
         }
 
         $relacaoComplemento = array();
-        foreach ($estadosComplemento as $estado) {            
-            foreach ($eventosComplemento as $evento) {
-                foreach ($this->relacao as $relacao) {
+        $relacoes = $this->relacao;
+        foreach ($this->estados as $estado) {
+            foreach ($eventosComplemento as $evento) {  
+                foreach ($relacoes as $relacao) {   
+                    $cont = 0;                
                     $from = $relacao[0];
                     $to = $relacao[1];
                     $label = $relacao[2];
-                    if(($from == $estado) && ($label == $evento)) {
+                    if(($from == $estado) && ($label == $evento) && ($to != 'dump')) {
                         $relacaoComplemento[] = [$from, $to, $label];
-                        $status = true;
-                    } elseif() {
-                        $relacaoComplemento[] = [$estado, 'dump', $evento];
+                        break;
+                    } elseif(($from == $estado) && ($label != $evento)) {
+                        foreach ($relacaoComplemento as $item) {
+                            if(($item[0] == $estado) && (($item[2] == $evento))) {
+                                $cont++;    
+                            }                            
+                        }
+                        if($cont == 0) {
+                            $relacaoComplemento[] = [$estado, 'dump', $evento];    
+                        }                         
                     }
-                }
-            }
+                }             
+            } 
+            array_shift($relacoes);           
         }
+
+        // dd($contador);
         // $relacaoComplemento = array_unique($relacaoComplemento);
         dd($relacaoComplemento);
 

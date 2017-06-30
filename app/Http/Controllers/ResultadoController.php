@@ -131,7 +131,7 @@ class ResultadoController extends Controller
         $title = "Parte CoAcessível";
         $possuiGrafico = true;
         $automato = new FuncaoController($this->automato);
-        $automatoResultante = $automato->parteCoAcessivel();
+        $automatoResultante = $automato->parteCoAcessivel($automato);
 
         return view('resultados.funcao')
                ->with('title', $title)
@@ -149,8 +149,7 @@ class ResultadoController extends Controller
         $title = "TRIM";
         $possuiGrafico = true;
         $automato = new FuncaoController($this->automato);
-        $automatoAcessivel = $automato->parteAcessivel();
-        $automatoResultante = $automato->parteCoAcessivel();
+        $automatoResultante = $automato->trim($automato);
 
         return view('resultados.funcao')
                ->with('title', $title)
@@ -168,7 +167,7 @@ class ResultadoController extends Controller
         $title = "Complemento";
         $possuiGrafico = true;
         $automato = new FuncaoController($this->automato);
-        $automatoResultante = $automato->complemento();
+        $automatoResultante = $automato->complemento($automato);
 
         return view('resultados.funcao')
                ->with('title', $title)

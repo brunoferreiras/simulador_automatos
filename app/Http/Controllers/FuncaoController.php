@@ -144,16 +144,16 @@ class FuncaoController extends Controller
 
     public function complemento($automato)
     {
-        $nomeComplemento = "Complemento do autômato: " . $this->automato->getNome();
-        $eventosComplemento = $this->eventos;
-        $estadosComplemento = $this->estados;        
-        $estadoInicialComplemento = $this->estadoInicial;
+        $nomeComplemento = "Complemento do autômato: " . $automato->nome;
+        $eventosComplemento = $automato->eventos;
+        $estadosComplemento = $automato->estados;        
+        $estadoInicialComplemento = $automato->estadoInicial;
 
-        $estadosComplemento[] = 'dump'; // Adiciona o estado d (dump)
+        $estadosComplemento[] = 'Xd'; // Adiciona o estado d (Xd)
         
         // Inverte a marcação dos estados
         $estadosMarcadosComplemento = $estadosComplemento;
-        foreach ($this->estadosMarcados as $estadoMarcado) {
+        foreach ($automato->estadosMarcados as $estadoMarcado) {
             $indexValue = array_search($estadoMarcado, $estadosComplemento);
             if($indexValue) {
                 unset($estadosMarcadosComplemento[$indexValue]);    
@@ -161,15 +161,15 @@ class FuncaoController extends Controller
         }
 
         $relacaoComplemento = array();
-        $relacoes = $this->relacao;
-        foreach ($this->estados as $estado) {
+        $relacoes = $automato->relacao;
+        foreach ($automato->estados as $estado) {
             foreach ($eventosComplemento as $evento) {  
                 foreach ($relacoes as $relacao) {   
                     $cont = 0;                
                     $from = $relacao[0];
                     $to = $relacao[1];
                     $label = $relacao[2];
-                    if(($from == $estado) && ($label == $evento) && ($to != 'dump')) {
+                    if(($from == $estado) && ($label == $evento) && ($to != 'Xd')) {
                         $relacaoComplemento[] = [$from, $to, $label];
                         break;
                     } elseif(($from == $estado) && ($label != $evento)) {
@@ -179,7 +179,7 @@ class FuncaoController extends Controller
                             }                            
                         }
                         if($cont == 0) {
-                            $relacaoComplemento[] = [$estado, 'dump', $evento];    
+                            $relacaoComplemento[] = [$estado, 'Xd', $evento];    
                         }                         
                     }
                 }             

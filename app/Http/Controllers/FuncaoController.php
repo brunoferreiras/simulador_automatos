@@ -189,7 +189,7 @@ class FuncaoController extends Controller
 
         // dd($contador);
         // $relacaoComplemento = array_unique($relacaoComplemento);
-        dd($relacaoComplemento);
+        // dd($relacaoComplemento);
 
         // Gera um objeto contendo o autômato parte acessível
         $automatoComplemento = (object) [
@@ -201,7 +201,7 @@ class FuncaoController extends Controller
             'edges' => $relacaoComplemento
         ];
 
-        return $automatoParteAcessivel;
+        return $automatoComplemento;
     }
 
     public function composicaoProduto()

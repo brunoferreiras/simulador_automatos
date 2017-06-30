@@ -67,20 +67,20 @@ class FuncaoController extends Controller
 
     }
 
-    public function parteAcessivel()
+    public function parteAcessivel($automato)
     {
-        $nomeParteAcessivel = "Parte acessível do autômato: " . $this->automato->getNome();
-        $eventosParteAcessivel = $this->eventos;
-        $estadosMarcadosParteAcessivel = $this->estadosMarcados;
-        $estadoInicialParteAcessivel = $this->estadoInicial;
+        $nomeParteAcessivel = "Parte acessível do autômato: " . $automato->nome;
+        $eventosParteAcessivel = $automato->eventos;
+        $estadosMarcadosParteAcessivel = $automato->estadosMarcados;
+        $estadoInicialParteAcessivel = $automato->estadoInicial;
 
         $relacaoParteAcessivel = array();
         $estadosNaoAcessiveis = array();
         $estadosParteAcessivel = array();
 
-        foreach ($this->estados as $estado) {
+        foreach ($automato->estados as $estado) {
             $acessivel = false;
-            foreach($this->relacao as $relacao) {
+            foreach($automato->relacao as $relacao) {
                 $to = $relacao[1];
 
                 if($estado == $to) {
@@ -95,7 +95,7 @@ class FuncaoController extends Controller
 
         // Gera as novas relações do autômato parte acessível
         foreach ($estadosNaoAcessiveis as $estadoNaoAcessivel) {
-            foreach($this->relacao as $relacao) {
+            foreach($automato->relacao as $relacao) {
                 $from = $relacao[0];
                 $to = $relacao[1];
                 $label = $relacao[2];
@@ -107,7 +107,7 @@ class FuncaoController extends Controller
         }
 
         // Retira os estados que não são acessíveis
-        foreach ($this->estados as $estado) {
+        foreach ($automato->estados as $estado) {
             $acessivel = true;
             foreach ($estadosNaoAcessiveis as $estadoNaoAcessivel) {
                 if($estado == $estadoNaoAcessivel) {
@@ -132,17 +132,17 @@ class FuncaoController extends Controller
         return $automatoParteAcessivel;
     }
 
-    public function parteCoAcessivel()
+    public function parteCoAcessivel($automato)
     {
 
     }
 
-    public function trim()
+    public function trim($automato)
     {
 
     }
 
-    public function complemento()
+    public function complemento($automato)
     {
         $nomeComplemento = "Complemento do autômato: " . $this->automato->getNome();
         $eventosComplemento = $this->eventos;

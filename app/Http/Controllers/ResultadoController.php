@@ -113,7 +113,7 @@ class ResultadoController extends Controller
         $title = "Parte Acessível";
         $possuiGrafico = true;
         $automato = new FuncaoController($this->automato);
-        $automatoResultante = $automato->parteAcessivel();
+        $automatoResultante = $automato->parteAcessivel($automato);
 
         return view('resultados.funcao')
                ->with('title', $title)
@@ -130,14 +130,37 @@ class ResultadoController extends Controller
     {
         $title = "Parte CoAcessível";
         $possuiGrafico = true;
-        return view('resultados.funcao', compact('title', 'possuiGrafico'));
+        $automato = new FuncaoController($this->automato);
+        $automatoResultante = $automato->parteCoAcessivel();
+
+        return view('resultados.funcao')
+               ->with('title', $title)
+               ->with('possuiGrafico', $possuiGrafico)
+               ->with('automato', $automatoResultante->nome)
+               ->with('nodes', $this->formatNodes($automatoResultante->nodes))
+               ->with('edges', $this->formatEdges($automatoResultante->edges))
+               ->with('eventos', $automatoResultante->eventos)
+               ->with('estadoInicial', $automatoResultante->estadoInicial)
+               ->with('estadosMarcados', $this->formatNodes($automatoResultante->estadosMarcados));
     }
 
     public function resultadoTrim($automato)
     {
         $title = "TRIM";
         $possuiGrafico = true;
-        return view('resultados.funcao', compact('title', 'possuiGrafico'));
+        $automato = new FuncaoController($this->automato);
+        $automatoAcessivel = $automato->parteAcessivel();
+        $automatoResultante = $automato->parteCoAcessivel();
+
+        return view('resultados.funcao')
+               ->with('title', $title)
+               ->with('possuiGrafico', $possuiGrafico)
+               ->with('automato', $automatoResultante->nome)
+               ->with('nodes', $this->formatNodes($automatoResultante->nodes))
+               ->with('edges', $this->formatEdges($automatoResultante->edges))
+               ->with('eventos', $automatoResultante->eventos)
+               ->with('estadoInicial', $automatoResultante->estadoInicial)
+               ->with('estadosMarcados', $this->formatNodes($automatoResultante->estadosMarcados));
     }
 
     public function resultadoComplemento($automato)

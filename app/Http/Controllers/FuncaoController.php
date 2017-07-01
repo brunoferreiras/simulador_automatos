@@ -148,8 +148,9 @@ class FuncaoController extends Controller
         $eventosComplemento = $automato->eventos;
         $estadosComplemento = $automato->estados;        
         $estadoInicialComplemento = $automato->estadoInicial;
+        $nomeEstadoDump = 'Xd';
 
-        $estadosComplemento[] = 'Xd'; // Adiciona o estado d (Xd)
+        $estadosComplemento[] = $nomeEstadoDump; // Adiciona o estado d (Xd)
         
         // Inverte a marcação dos estados
         $estadosMarcadosComplemento = $estadosComplemento;
@@ -163,34 +164,47 @@ class FuncaoController extends Controller
         $relacaoComplemento = array();
         $relacoes = $automato->relacao;
         foreach ($automato->estados as $estado) {
-            foreach ($eventosComplemento as $evento) {  
+            foreach ($eventosComplemento as $evento) {
+                $contEstado = 0;
                 foreach ($relacoes as $relacao) {   
                     $cont = 0;                
                     $from = $relacao[0];
                     $to = $relacao[1];
                     $label = $relacao[2];
-                    if(($from == $estado) && ($label == $evento) && ($to != 'Xd')) {
+                    if(($from == $estado) && ($label == $evento) && ($to != $nomeEstadoDump)) {
+                        $contDump = 0;
+                        foreach ($relacaoComplemento as $item) {
+                            if(($item[0] == $estado) && ($item[1] == $nomeEstadoDump) && ($item[2] == $evento)) {
+                                $contDump++;
+                            }
+                        }
+                        if($contDump > 0) {
+                            array_pop($relacaoComplemento);
+                        }
                         $relacaoComplemento[] = [$from, $to, $label];
+                        $contEstado++;
                         break;
                     } elseif(($from == $estado) && ($label != $evento)) {
                         foreach ($relacaoComplemento as $item) {
-                            if(($item[0] == $estado) && (($item[2] == $evento))) {
+                            if(($item[0] == $estado) && ($item[2] == $evento)) {
                                 $cont++;    
                             }                            
                         }
                         if($cont == 0) {
-                            $relacaoComplemento[] = [$estado, 'Xd', $evento];    
+                            $relacaoComplemento[] = [$estado, $nomeEstadoDump, $evento];
+                            $contEstado++;
                         }                         
                     }
                 }             
-            } 
+            }
+            if($contEstado == 0) {
+                foreach ($eventosComplemento as $value) {
+                    $relacaoComplemento[] = [$estado, $nomeEstadoDump, $value];
+                }
+            }
             array_shift($relacoes);           
         }
-
-        // dd($contador);
-        // $relacaoComplemento = array_unique($relacaoComplemento);
-        // dd($relacaoComplemento);
-
+        
         // Gera um objeto contendo o autômato parte acessível
         $automatoComplemento = (object) [
             'nome' => $nomeComplemento,

@@ -23,6 +23,8 @@
 
 		<!- VisJS -->
 		<link href="http://visjs.org/dist/vis-network.min.css" rel="stylesheet" type="text/css" />
+        
+        <link rel="stylesheet" href="../style.css" type="text/css">
 
         <style type="text/css">
             #myautomato {
@@ -30,6 +32,7 @@
                 height: 600px;
                 border: 1px solid lightgray;
             }
+          
         </style>
 	</head>
     <body>

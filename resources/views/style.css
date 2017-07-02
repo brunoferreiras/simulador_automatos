@@ -1,0 +1,20 @@
+body {
+  background: #686b32;
+  color: #fff;
+}
+
+/* Menu*/
+.navbar {
+  background: #182128;
+  width: 100%;
+  border-radius: 0;
+  border: none;
+}
+.navbar-default .navbar-nav>li>a, .navbar-default .navbar-brand {
+  color: #fff;
+  box-shadow: none;
+  transition: all .3s ease;
+}
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-brand:hover {
+  color: #b2883f;
+}

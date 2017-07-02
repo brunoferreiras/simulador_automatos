@@ -23,6 +23,8 @@
 
 		<!- VisJS -->
 		<link href="http://visjs.org/dist/vis-network.min.css" rel="stylesheet" type="text/css" />
+        
+        <link rel="stylesheet" href="../style.css" type="text/css">
 
         <style type="text/css">
             #myautomato {
@@ -30,12 +32,14 @@
                 height: 600px;
                 border: 1px solid lightgray;
             }
+          
         </style>
 	</head>
     <body>
-        <div class="container">
+        
 	      <!-- Static navbar -->
-	      <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default">
+          <div class="container">
 	        <div class="container-fluid">
 	          <div class="navbar-header">
 	            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">

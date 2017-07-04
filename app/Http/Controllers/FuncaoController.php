@@ -134,7 +134,68 @@ class FuncaoController extends Controller
 
     public function parteCoAcessivel($automato)
     {
+        $nomeParteCoAcessivel = "Parte acessível do autômato: " . $automato->nome;
+        $eventosParteCoAcessivel = $automato->eventos;
+        $estadosMarcadosParteCoAcessivel = $automato->estadosMarcados;
+        $estadoInicialParteCoAcessivel = $automato->estadoInicial;
 
+        $relacaoParteCoAcessivel = array();
+        $estadosNaoAcessiveis = array();
+        $estadosParteCoAcessivel = array();
+
+        foreach ($automato->estados as $estado) {
+            $coAcessivel = false;
+            foreach($automato->relacao as $relacao) {
+                $from = $relacao[0];
+                $to = $relacao[1];
+
+                if($estado == $from) {
+                    $coAcessivel = true;
+                }
+            }
+
+            if(!$coAcessivel) {
+                $estadosNaoAcessiveis[] = $estado;
+            }
+        }        
+
+        // Gera as novas relações do autômato parte acessível
+        foreach ($estadosNaoAcessiveis as $estadoNaoCoAcessivel) {
+            foreach($automato->relacao as $relacao) {
+                $from = $relacao[0];
+                $to = $relacao[1];
+                $label = $relacao[2];
+
+                if($estadoNaoCoAcessivel != $to) {
+                    $relacaoParteCoAcessivel[] = [$from, $to, $label];
+                }
+            }
+        }
+
+        // Retira os estados que não são acessíveis
+        foreach ($automato->estados as $estado) {
+            $coAcessivel = true;
+            foreach ($estadosNaoAcessiveis as $estadoNaoCoAcessivel) {
+                if($estado == $estadoNaoCoAcessivel) {
+                    $coAcessivel = false;
+                }
+            }
+            if($coAcessivel) {
+                $estadosParteCoAcessivel[] = $estado;
+            }
+        }       
+
+        // Gera um objeto contendo o autômato parte acessível
+        $automatoParteCoAcessivel = (object) [
+            'nome' => $nomeParteCoAcessivel,
+            'nodes' => $estadosParteCoAcessivel,
+            'eventos' => $eventosParteCoAcessivel,
+            'estadoInicial' => $estadoInicialParteCoAcessivel,
+            'estadosMarcados' => $estadosMarcadosParteCoAcessivel,
+            'edges' => $relacaoParteCoAcessivel
+        ];
+
+        return $automatoParteCoAcessivel;
     }
 
     public function trim($automato)

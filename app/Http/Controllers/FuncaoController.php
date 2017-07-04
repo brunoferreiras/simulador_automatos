@@ -57,14 +57,14 @@ class FuncaoController extends Controller
         $this->estadosMarcados = explode("|", $estadosMarcados);
     }
 
-    public function linguagemGerada()
+    public function linguagemGerada($automato)
     {
-
+        dd($automato);
     }
 
-    public function linguagemMarcada()
+    public function linguagemMarcada($automato)
     {
-
+        dd($automato);
     }
 
     public function parteAcessivel($automato)

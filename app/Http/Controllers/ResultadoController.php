@@ -79,7 +79,7 @@ class ResultadoController extends Controller
     {
         $title = "Linguagem Gerada";
         $automato = new FuncaoController($this->automato);
-        $linguagemGerada = $automato->linguagemGerada();
+        $linguagemGerada = $automato->linguagemGerada($automato);
         $possuiGrafico = false;
         return view('resultados.funcao', compact('title', 'possuiGrafico', 'linguagemGerada'));
     }
@@ -88,7 +88,7 @@ class ResultadoController extends Controller
     {
         $title = "Linguagem Marcada";
         $automato = new FuncaoController($this->automato);
-        $linguagemMarcada = $automato->linguagemMarcada();
+        $linguagemMarcada = $automato->linguagemMarcada($automato);
         $possuiGrafico = false;
         return view('resultados.funcao', compact('title', 'possuiGrafico', 'linguagemMarcada'));
     }

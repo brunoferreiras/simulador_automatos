@@ -144,6 +144,9 @@ class FuncaoController extends Controller
 
     public function complemento($automato)
     {
+        $automatoAcessivel = $this->parteAcessivel($automato);
+        $automatoCoAcessivel = $this->parteCoAcessivel($automatoAcessivel);
+        $automato = $automatoCoAcessivel;
         $nomeComplemento = "Complemento do autômato: " . $automato->nome;
         $eventosComplemento = $automato->eventos;
         $estadosComplemento = $automato->estados;        

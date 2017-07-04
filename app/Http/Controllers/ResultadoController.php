@@ -78,15 +78,19 @@ class ResultadoController extends Controller
     public function resultadoLinguagemGerada($automato)
     {
         $title = "Linguagem Gerada";
+        $automato = new FuncaoController($this->automato);
+        $linguagemGerada = $automato->linguagemGerada();
         $possuiGrafico = false;
-        return view('resultados.funcao', compact('title', 'possuiGrafico'));
+        return view('resultados.funcao', compact('title', 'possuiGrafico', 'linguagemGerada'));
     }
 
     public function resultadoLinguagemMarcada($automato)
     {
         $title = "Linguagem Marcada";
+        $automato = new FuncaoController($this->automato);
+        $linguagemMarcada = $automato->linguagemMarcada();
         $possuiGrafico = false;
-        return view('resultados.funcao', compact('title', 'possuiGrafico'));
+        return view('resultados.funcao', compact('title', 'possuiGrafico', 'linguagemMarcada'));
     }
 
     public function formatNodes($nodes) {

@@ -57,9 +57,50 @@ class FuncaoController extends Controller
         $this->estadosMarcados = explode("|", $estadosMarcados);
     }
 
+    public function getRelacaoByFrom($estado, $relacoes) {
+        $array = array();
+
+        foreach ($relacoes as $relacao) {
+            $from = $relacao[0];
+            $to = $relacao[1];
+            $label = $relacao[2];
+            if($estado == $from) {
+                $array[] = $relacao;
+            }
+        } 
+
+        return $array;
+    }
+
     public function linguagemGerada($automato)
     {
-        dd($automato);
+        $linguagemGerada = array('&epsilon;');
+        $estadoInicial = $automato->estadoInicial;
+        $relacaoInicial = $this->getRelacaoByFrom($estadoInicial, $automato->relacao);
+        $limitePalavras = 10;
+        $linguagemGerada = $relacaoInicial;
+        dd($linguagemGerada);
+        while(count($linguagemGerada) <= $limitePalavras) {
+            dd(count($linguagemGerada));
+        }
+        
+
+        foreach ($automato->relacao as $relacao) {
+            $from = $relacao[0];
+            $to = $relacao[1];
+            $label = $relacao[2];
+            if($estadoInicial == $from) {
+                if($from == $to) {
+                    $relacaoInicial[] = [$from, $to, $label];
+                    $linguagemGerada[] = $label."^n"; 
+                } else {
+                    $relacaoInicial[] = [$from, $to, $label];
+                    $linguagemGerada[] = $label;                    
+                }
+            }
+        } 
+
+        dd($linguagemGerada);
     }
 
     public function linguagemMarcada($automato)

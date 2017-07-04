@@ -200,14 +200,33 @@ class FuncaoController extends Controller
 
     public function trim($automato)
     {
+        $nomeTRIM = "TRIM do autômato: " . $automato->nome;
 
+        $automatoParteAcessivel = $this->parteAcessivel($automato);
+        $automatoParteCoAcessivel = $this->parteCoAcessivel($automatoParteAcessivel);
+        $automato = $automatoParteCoAcessivel;        
+        $estadosTRIM = $automato->estados;
+        $eventosTRIM = $automato->eventos;
+        $estadosMarcadosTRIM = $automato->estadosMarcados;
+        $estadoInicialTRIM = $automato->estadoInicial;
+        $relacaoTRIM = $automato->relacao;
+
+        // Gera um objeto contendo o autômato parte acessível
+        $automatoTRIM = (object) [
+            'nome' => $nomeTRIM,
+            'nodes' => $estadosTRIM,
+            'eventos' => $eventosTRIM,
+            'estadoInicial' => $estadoInicialTRIM,
+            'estadosMarcados' => $estadosMarcadosTRIM,
+            'edges' => $relacaoTRIM
+        ];
+
+        return $automatoTRIM;
     }
 
     public function complemento($automato)
     {
-        $automatoAcessivel = $this->parteAcessivel($automato);
-        $automatoCoAcessivel = $this->parteCoAcessivel($automatoAcessivel);
-        $automato = $automatoCoAcessivel;
+        $automato = $this->trim($automato);
         $nomeComplemento = "Complemento do autômato: " . $automato->nome;
         $eventosComplemento = $automato->eventos;
         $estadosComplemento = $automato->estados;        

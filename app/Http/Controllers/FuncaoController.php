@@ -146,7 +146,7 @@ class FuncaoController extends Controller
         $estadoInicialParteCoAcessivel = $automato->estadoInicial;
 
         $relacaoParteCoAcessivel = array();
-        $estadosNaoAcessiveis = array();
+        $estadosNaoCoAcessiveis = array();
         $estadosParteCoAcessivel = array();
 
         foreach ($automato->estados as $estado) {
@@ -161,27 +161,31 @@ class FuncaoController extends Controller
             }
 
             if(!$coAcessivel) {
-                $estadosNaoAcessiveis[] = $estado;
+                $estadosNaoCoAcessiveis[] = $estado;
             }
         }        
 
         // Gera as novas relações do autômato parte acessível
-        foreach ($estadosNaoAcessiveis as $estadoNaoCoAcessivel) {
-            foreach($automato->relacao as $relacao) {
-                $from = $relacao[0];
-                $to = $relacao[1];
-                $label = $relacao[2];
+        if($estadosNaoCoAcessiveis) {
+            foreach ($estadosNaoCoAcessiveis as $estadoNaoCoAcessivel) {
+                foreach($automato->relacao as $relacao) {
+                    $from = $relacao[0];
+                    $to = $relacao[1];
+                    $label = $relacao[2];
 
-                if($estadoNaoCoAcessivel != $to) {
-                    $relacaoParteCoAcessivel[] = [$from, $to, $label];
+                    if($estadoNaoCoAcessivel != $to) {
+                        $relacaoParteCoAcessivel[] = [$from, $to, $label];
+                    }
                 }
             }
+        } else {
+            $relacaoParteCoAcessivel = $automato->relacao;
         }
 
         // Retira os estados que não são acessíveis
         foreach ($automato->estados as $estado) {
             $coAcessivel = true;
-            foreach ($estadosNaoAcessiveis as $estadoNaoCoAcessivel) {
+            foreach ($estadosNaoCoAcessiveis as $estadoNaoCoAcessivel) {
                 if($estado == $estadoNaoCoAcessivel) {
                     $coAcessivel = false;
                 }

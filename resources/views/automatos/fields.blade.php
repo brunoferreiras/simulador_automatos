@@ -16,6 +16,7 @@
     <div class="col-sm-10">
         <input type="text" class="form-control" name="estados" placeholder="Digite os estados do autômato." required>
         <p class="help-block"">Exemplo: X1, X2, X3</p>
+        <p class="help-block"">Obs.: o estado "Xd", é reservado para o sistema, então não use como nome de estado para o autômato.</p>
         @if ( $errors->has('estados') )
             <span class="help-block">
                 <strong>{{ $errors->first('estados') }}</strong>
@@ -27,8 +28,8 @@
 <div class="form-group {{ $errors->has('eventos') ? ' has-error' : ''}}">
     <label for="eventos" class="col-sm-2 control-label">Eventos:</label>
     <div class="col-sm-10">
-        <input type="text" class="form-control" name="eventos" placeholder="Digite os eventos do autômato. Exemplo: X1, X2, X3" required>
-        <p class="help-block"">Exemplo: E1, E2</p>
+        <input type="text" class="form-control" name="eventos" placeholder="Digite os eventos do autômato." required>
+        <p class="help-block"">Exemplo: E1, E2, E3</p>
         @if ( $errors->has('eventos') )
             <span class="help-block">
                 <strong>{{ $errors->first('eventos') }}</strong>
@@ -44,10 +45,21 @@
         <textarea class="form-control" name="relacao_estados_eventos" rows="4" placeholder="Digite a função de relação estados e eventos." required></textarea>
         <p class="help-block"><b>
             Exemplo:<br>
-            E1 > X1 | -  | X3 ; <br>
-            E2 > -  | X2 | - ;
-            </b></p>
-        <p class="help-block">Obs.: Os estados serão definidos na sequência em que foram criadas.</p>
+            X1 > X1 | -  | X3 ; <br>
+            X2 > -  | X2 | - ;
+            </b>
+        </p>
+        <p class="help-block">Assumi-se a seguinte formação:<br>
+            <ul>
+               <li>O estado X1, ao ativar o evento E1, vai para o estado X1.</li>
+               <li>O estado X1, não possui o evento E2.</li>
+               <li>O estado X1, ao ativar o evento E3, vai para o estado X3.</li>
+               <li>O estado X2, não possui o evento E1.</li>
+               <li>O estado X2, ao ativar o evento E2, vai para o estado X2.</li>
+               <li>Assim por diante.</li>
+            </ul>
+        </p>
+        <p class="help-block">Obs.: Os estados e eventos serão definidos na sequência em que foram criadas. Ou seja, a margem vertical representa os eventos e a margem horizontal os estados.</p>
         @if ( $errors->has('relacao_estados_eventos') )
             <span class="help-block">
                 <strong>{{ $errors->first('relacao_estados_eventos') }}</strong>

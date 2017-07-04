@@ -9,6 +9,6 @@
 		</p>
 	</div>
 	<footer class="text-center">
-		<p>Desenvolvido por <a href="https://github.com/brunoferreiras">Bruno Ferreira</a></p>
+		<p>Desenvolvido por <a href="https://github.com/brunoferreiras">Bruno Ferreira</a> e <a href="https://github.com/brennolemos">Breno Lemos</a></p>
 	</footer>
 @endsection

@@ -126,7 +126,7 @@ class ResultadoController extends Controller
                ->with('estadosMarcados', $this->formatNodes($automatoResultante->estadosMarcados));
     }
 
-    public function resultadoParteCoAcessivel($automato)
+    public function resultadoParteCoAcessivel()
     {
         $title = "Parte CoAcessível";
         $possuiGrafico = true;
@@ -144,10 +144,10 @@ class ResultadoController extends Controller
                ->with('estadosMarcados', $this->formatNodes($automatoResultante->estadosMarcados));
     }
 
-    public function resultadoTrim($automato)
+    public function resultadoTrim()
     {
         $title = "TRIM";
-        $possuiGrafico = true;
+        $possuiGrafico = true;        
         $automato = new FuncaoController($this->automato);
         $automatoResultante = $automato->trim($automato);
 
@@ -162,7 +162,7 @@ class ResultadoController extends Controller
                ->with('estadosMarcados', $this->formatNodes($automatoResultante->estadosMarcados));
     }
 
-    public function resultadoComplemento($automato)
+    public function resultadoComplemento()
     {
         $title = "Complemento";
         $possuiGrafico = true;

@@ -94,16 +94,20 @@ class FuncaoController extends Controller
         }
 
         // Gera as novas relações do autômato parte acessível
-        foreach ($estadosNaoAcessiveis as $estadoNaoAcessivel) {
-            foreach($automato->relacao as $relacao) {
-                $from = $relacao[0];
-                $to = $relacao[1];
-                $label = $relacao[2];
+        if($estadosNaoAcessiveis) {
+            foreach ($estadosNaoAcessiveis as $estadoNaoAcessivel) {
+                foreach($automato->relacao as $relacao) {
+                    $from = $relacao[0];
+                    $to = $relacao[1];
+                    $label = $relacao[2];
 
-                if($estadoNaoAcessivel != $from) {
-                    $relacaoParteAcessivel[] = [$from, $to, $label];
+                    if($estadoNaoAcessivel != $from) {
+                        $relacaoParteAcessivel[] = [$from, $to, $label];
+                    }
                 }
             }
+        } else {
+            $relacaoParteAcessivel = $automato->relacao;
         }
 
         // Retira os estados que não são acessíveis
@@ -123,10 +127,12 @@ class FuncaoController extends Controller
         $automatoParteAcessivel = (object) [
             'nome' => $nomeParteAcessivel,
             'nodes' => $estadosParteAcessivel,
+            'estados' => $estadosParteAcessivel,
             'eventos' => $eventosParteAcessivel,
             'estadoInicial' => $estadoInicialParteAcessivel,
             'estadosMarcados' => $estadosMarcadosParteAcessivel,
-            'edges' => $relacaoParteAcessivel
+            'edges' => $relacaoParteAcessivel,
+            'relacao' => $relacaoParteAcessivel
         ];
 
         return $automatoParteAcessivel;
@@ -189,10 +195,12 @@ class FuncaoController extends Controller
         $automatoParteCoAcessivel = (object) [
             'nome' => $nomeParteCoAcessivel,
             'nodes' => $estadosParteCoAcessivel,
+            'estados' => $estadosParteCoAcessivel,
             'eventos' => $eventosParteCoAcessivel,
             'estadoInicial' => $estadoInicialParteCoAcessivel,
             'estadosMarcados' => $estadosMarcadosParteCoAcessivel,
-            'edges' => $relacaoParteCoAcessivel
+            'edges' => $relacaoParteCoAcessivel,
+            'relacao' => $relacaoParteCoAcessivel
         ];
 
         return $automatoParteCoAcessivel;
@@ -200,8 +208,7 @@ class FuncaoController extends Controller
 
     public function trim($automato)
     {
-        $nomeTRIM = "TRIM do autômato: " . $automato->nome;
-
+        $nomeTRIM = "TRIM do autômato: " . $automato->nome;        
         $automatoParteAcessivel = $this->parteAcessivel($automato);
         $automatoParteCoAcessivel = $this->parteCoAcessivel($automatoParteAcessivel);
         $automato = $automatoParteCoAcessivel;        
@@ -215,10 +222,12 @@ class FuncaoController extends Controller
         $automatoTRIM = (object) [
             'nome' => $nomeTRIM,
             'nodes' => $estadosTRIM,
+            'estados' => $estadosTRIM,
             'eventos' => $eventosTRIM,
             'estadoInicial' => $estadoInicialTRIM,
             'estadosMarcados' => $estadosMarcadosTRIM,
-            'edges' => $relacaoTRIM
+            'edges' => $relacaoTRIM,
+            'relacao' => $relacaoTRIM
         ];
 
         return $automatoTRIM;
